@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  calculator:
+    build: .
+    container_name: calculator_app
+    command: ["java", "-jar", "app.jar"]
+    ports:
+      - "8080:8080"
+  
+  tests:
+    image: maven:3.9.6-eclipse-temurin-17
+    container_name: calculator_tests
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: mvn test
