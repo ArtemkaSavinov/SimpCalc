@@ -25,4 +25,4 @@ jobs:
       
       # 4. Собираем образы и прогоняем тесты через docker compose
       - name: Build and run tests via docker compose
-        run: docker compose -f docker-compose.yml up --build --exit-code-from tests
+        run: docker compose -f docker-compose.yml up --build --abort-on-container-exit --exit-code-from tests
