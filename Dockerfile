@@ -1,19 +1,19 @@
-# Этап 1: сборка
+# Этап сборки Maven
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Сначала копируем только pom.xml (чтобы закэшировать зависимости)
+# Копируем pom.xml и src
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
-
-# Теперь копируем исходники
 COPY src ./src
 
-# Собираем проект
-RUN mvn clean package
+# Сборка проекта (тесты можно включить)
+RUN mvn clean package -DskipTests
 
-# Этап 2: минимальный образ для запуска
+# Этап рантайм
 FROM eclipse-temurin:17-jdk
 WORKDIR /app
-COPY target/calculator-1.0-SNAPSHOT.jar app.jar
+
+# Копируем jar из этапа сборки
+COPY --from=build /app/target/calculator-1.0-SNAPSHOT.jar app.jar
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
