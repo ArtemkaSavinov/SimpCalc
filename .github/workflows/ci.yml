@@ -15,14 +15,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       
-      # 2. Устанавливаем Docker Buildx
+      # 2. Настраиваем Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       
-      # 3. Проверка Docker версии
+      # 3. Проверка версии Docker
       - name: Check Docker version
         run: docker --version
       
-      # 4. Собираем образы и прогоняем тесты через docker compose
-      - name: Build and run tests via docker compose
-        run: docker compose -f docker-compose.yml up --build --abort-on-container-exit --exit-code-from tests
+      # 4. Сборка Docker образа приложения
+      - name: Build Docker image
+        run: docker build -t calculator .
+      
+      # 5. Запуск контейнера тестов отдельно
+      - name: Run tests
+        run: docker compose run --rm tests
