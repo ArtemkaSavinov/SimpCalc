@@ -30,16 +30,15 @@ docker build -t calculator .
 docker run --rm calculator
 ```
 ### Структура проекта
-
-calculator/
-├── src/                  # Исходники Java
-├── pom.xml               # Maven конфигурация
-├── Dockerfile            # Multi-stage Dockerfile
-├── docker-compose.yml    # Compose для приложения и тестов
-├── .github/
-│   └── workflows/
-│       └── ci.yml        # GitHub Actions workflow
-└── README.md             # Этот файл
+- calculator/
+    - src/                  → Исходники Java
+    - pom.xml               → Maven конфигурация
+    - Dockerfile            → Multi-stage Dockerfile
+    - docker-compose.yml    → Compose для приложения и тестов
+    - .github/
+        - workflows/
+            - ci.yml            → GitHub Actions workflow
+    - README.md             → Этот файл
 
 
 ## 🔧 Требования
