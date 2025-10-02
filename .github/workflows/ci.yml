@@ -26,4 +26,4 @@ jobs:
       # 4. Собираем и запускаем docker-compose напрямую
       - name: Build and run tests via docker-compose
         run: |
-          docker-compose -f docker-compose.yml up --build --exit-code-from tests
+          docker compose -f docker-compose.yml up --build --exit-code-from tests
